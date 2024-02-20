@@ -7,11 +7,13 @@ import {
 } from '@react-navigation/native';
 
 import AuthNavigationStack from './AuthNavigation.stack';
+import BottomTabsNavigationStack, {
+  BottomTabsNavigationParamList,
+} from './BottomTabsNavigation.stack';
 
 export type RootStackParamList = {
   AUTH_NAVIGATION_STACK: NavigatorScreenParams<undefined>;
-  // BOTTOM_TABS_NAVIGATION: NavigatorScreenParams<BottomTabsNavigationParamList>;
-  // QUESTION_TEST_NAVIGATION_STACK: NavigatorScreenParams<QuestionTestStackParamList>;
+  BOTTOM_TABS_NAVIGATION_STACK: NavigatorScreenParams<BottomTabsNavigationParamList>;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -23,6 +25,13 @@ const RootNavigation = () => {
         <Stack.Screen
           name={'AUTH_NAVIGATION_STACK'}
           component={AuthNavigationStack}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={'BOTTOM_TABS_NAVIGATION_STACK'}
+          component={BottomTabsNavigationStack}
           options={{
             headerShown: false,
           }}
