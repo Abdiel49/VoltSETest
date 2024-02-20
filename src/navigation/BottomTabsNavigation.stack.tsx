@@ -39,8 +39,8 @@ const BottomTabsNavigationStack = () => {
             return <AntDesignIcon name="staro" color={color} size={size} />;
           }
         },
-        tabBarActiveTintColor: Colors.secundary,
-        tabBarInactiveTintColor: Colors.text,
+        tabBarActiveTintColor: Colors.activeTabbarIcon,
+        tabBarInactiveTintColor: Colors.inactiveTabbarIcon,
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {CompositeScreenProps} from '@react-navigation/native';
+import {CommonActions, CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from '../../navigation/RootNavigation';
@@ -20,9 +20,19 @@ type LoginScreenProps = CompositeScreenProps<
 >;
 const LoginScreen = (props: LoginScreenProps) => {
   const hanldeLoginBtn = () => {
-    props.navigation.navigate('BOTTOM_TABS_NAVIGATION_STACK', {
-      screen: 'DOG_API_STACK',
-    });
+    // props.navigation.navigate('BOTTOM_TABS_NAVIGATION_STACK', {
+    //   screen: 'DOG_API_STACK',
+    // });
+    props.navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          {
+            name: 'BOTTOM_TABS_NAVIGATION_STACK',
+          },
+        ],
+      }),
+    );
   };
 
   return (
