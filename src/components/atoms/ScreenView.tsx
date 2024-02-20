@@ -30,10 +30,10 @@ export default ScreenView;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white_200,
   },
   main: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white_200,
   },
 });

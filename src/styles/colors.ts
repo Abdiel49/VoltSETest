@@ -1,6 +1,8 @@
 export const Colors = {
   black: '#000',
   black_200: '#2F3136',
+  activeTabbarIcon: '#ffffff',
+  inactiveTabbarIcon: '#a09f9f',
   //
   black_a6: 'rgba(0, 0, 0, 0.6)',
   black_a4: 'rgba(0, 0, 0, 0.4)',
@@ -16,7 +18,7 @@ export const Colors = {
   red: '#EC1C24',
   red_100: '#FF002E',
   secundary: '#4F545C',
-  text: '#EBEBEB',
+  text: '#2d2d2d',
   transparent: 'rgba(0, 0, 0, 0)',
   white: '#FFF',
   white_200: '#F2F2F2',
