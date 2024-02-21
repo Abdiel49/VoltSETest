@@ -90,4 +90,12 @@ export const gStyles = StyleSheet.create({
 
     elevation: 10,
   },
+  card1: {
+    borderRadius: normalize(10),
+    padding: normalize(10),
+  },
+  card2: {
+    borderRadius: normalize(20),
+    padding: normalize(16),
+  },
 });

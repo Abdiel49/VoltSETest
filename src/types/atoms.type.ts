@@ -1,4 +1,4 @@
-import {StyleProp, TextProps, TextStyle} from 'react-native';
+import {StyleProp, TextInputProps, TextProps, TextStyle} from 'react-native';
 
 export interface LoadingModalProps {
   isVisible: boolean;
@@ -25,4 +25,9 @@ export interface TextComponentProps extends TextProps {
   yellow?: boolean;
   green?: boolean;
   H2?: boolean;
+}
+
+export interface TextInputComponentProps extends TextInputProps {
+  value?: string;
+  onChangeText?: (text: string) => void;
 }

@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import DogCeo from '../screens/docApi/DogCeo';
 import NewsPapers from '../screens/chroniclingAmerica/NewsPapers';
-import Journals from '../screens/crossRef/Journals';
+import Journals from '../screens/crossRef/screens/Journals';
 import Tickers from '../screens/wazirx/Tickers';
 
 import {Colors} from '../styles/colors';

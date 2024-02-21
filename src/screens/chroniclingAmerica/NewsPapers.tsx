@@ -1,4 +1,4 @@
-import {View, Text, FlatList, ListRenderItem, StyleSheet} from 'react-native';
+import {View, FlatList, ListRenderItem, StyleSheet} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 
 import ScreenView from '../../components/atoms/ScreenView';
@@ -10,6 +10,7 @@ import TextComponent from '../../components/atoms/TextComponent';
 import {Colors} from '../../styles/colors';
 import normalize from '../../helpers/normalizeFontSize';
 import {gStyles} from '../../styles/gStyles';
+import ListSeparator from '../../components/atoms/ListSeparator';
 
 const NewsPapers = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,14 +35,6 @@ const NewsPapers = () => {
     getData();
   }, []);
 
-  const renderSeparator = () => {
-    return (
-      <View style={styles.separatorContainer}>
-        <View style={styles.separator} />
-      </View>
-    );
-  };
-
   const renderItem: ListRenderItem<NewspaperType> = ({item}) => {
     return (
       <View key={item.lccn} style={[styles.newsCard, gStyles.shadow_10]}>
@@ -61,7 +54,7 @@ const NewsPapers = () => {
         data={newsPapers}
         renderItem={renderItem}
         initialNumToRender={5}
-        ItemSeparatorComponent={renderSeparator}
+        ItemSeparatorComponent={ListSeparator}
         indicatorStyle="white"
       />
     </ScreenView>
@@ -81,17 +74,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  separatorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 5,
-  },
-  separator: {
-    width: 200,
-    height: 4,
-    borderRadius: 20,
-    backgroundColor: Colors.white_200_a8,
   },
 });
