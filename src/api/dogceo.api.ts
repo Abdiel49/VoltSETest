@@ -18,6 +18,6 @@ export const getDocCeo = async (): Promise<
     }
     // TODO: handle more status code
   } catch (error) {
-    throw new Error('Erron on get dog ceo data');
+    throw new Error('Error on get dog ceo data');
   }
 };

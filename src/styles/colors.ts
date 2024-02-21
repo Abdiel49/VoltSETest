@@ -23,5 +23,6 @@ export const Colors = {
   white: '#FFF',
   white_200: '#F2F2F2',
   white_200_a4: 'rgba(242, 242, 242, 0.4)',
+  white_200_a8: 'rgba(242, 242, 242, 0.8)',
   yellow: '#F5B700',
 };

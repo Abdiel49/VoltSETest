@@ -1,5 +1,6 @@
 import React from 'react';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import DogCeo from '../screens/docApi/DogCeo';
@@ -25,23 +26,23 @@ const BottomTabsNavigationStack = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({/*focused,*/ color, size}) => {
           if (route.name === 'DOG_API_STACK') {
-            return <AntDesignIcon name="home" color={color} size={size} />;
+            return <FontAwesome5Icon name="dog" color={color} size={size} />;
           }
           if (route.name === 'CHRONICLING_AMERICA_STACK') {
             return (
-              <AntDesignIcon name="infocirlceo" color={color} size={size} />
+              <FontAwesome5Icon name="newspaper" color={color} size={size} />
             );
           }
           if (route.name === 'CROSSREF') {
-            return <AntDesignIcon name="areachart" color={color} size={size} />;
+            return <IoniconsIcon name="journal" color={color} size={size} />;
           }
           if (route.name === 'WAZIRC') {
-            return <AntDesignIcon name="staro" color={color} size={size} />;
+            return <FontAwesome5Icon name="bone" color={color} size={size} />;
           }
         },
         tabBarActiveTintColor: Colors.activeTabbarIcon,
         tabBarInactiveTintColor: Colors.inactiveTabbarIcon,
-        headerShown: false,
+        headerShown: true,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: Colors.black_200,
@@ -50,22 +51,22 @@ const BottomTabsNavigationStack = () => {
       <Tab.Screen
         name="DOG_API_STACK"
         component={DogCeo}
-        options={{title: 'Inicio'}}
+        options={{title: 'Dog Breeds'}}
       />
       <Tab.Screen
         name="CHRONICLING_AMERICA_STACK"
         component={NewsPapers}
-        options={{title: 'Inicio'}}
+        options={{title: 'News Papers'}}
       />
       <Tab.Screen
         name="CROSSREF"
         component={Journals}
-        options={{title: 'Inicio'}}
+        options={{title: 'Journals'}}
       />
       <Tab.Screen
         name="WAZIRC"
         component={Tickers}
-        options={{title: 'Inicio'}}
+        options={{title: 'Tickers'}}
       />
     </Tab.Navigator>
   );
