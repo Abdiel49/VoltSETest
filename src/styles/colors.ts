@@ -15,6 +15,10 @@ export const Colors = {
   buttonColorBlack: '#4F545C',
   buttonColorBlack_a50: '#4f545cf0',
   buttonColorBlack_disabled: '#626d76f6',
+  purple_400_a2: 'rgba(110, 0, 195, 0.2)',
+  purple_400_a4: 'rgba(110, 0, 195, 0.4)',
+  purple_400_a6: 'rgba(110, 0, 195, 0.6)',
+  purple_400_a8: 'rgba(110, 0, 195, 0.8)',
   red: '#EC1C24',
   red_100: '#FF002E',
   secundary: '#4F545C',
@@ -23,5 +27,6 @@ export const Colors = {
   white: '#FFF',
   white_200: '#F2F2F2',
   white_200_a4: 'rgba(242, 242, 242, 0.4)',
+  white_200_a8: 'rgba(242, 242, 242, 0.8)',
   yellow: '#F5B700',
 };
