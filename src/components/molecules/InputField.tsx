@@ -7,17 +7,17 @@ import {gStyles} from '../../styles/gStyles';
 
 type InputFieldProps = {
   keyboardtype?: KeyboardTypeOptions;
-  onChange?: (text: string) => void;
+  onChangeText?: (text: string) => void;
   value?: string;
   label?: string;
 };
 
 const InputField = (props: InputFieldProps) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.value || '');
 
   const handleOnChange = (text: string) => {
     setValue(text);
-    props.onChange && props.onChange(text);
+    props.onChangeText && props.onChangeText(text);
   };
 
   return (
