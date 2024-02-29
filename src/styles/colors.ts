@@ -15,6 +15,7 @@ export const Colors = {
   buttonColorBlack: '#4F545C',
   buttonColorBlack_a50: '#4f545cf0',
   buttonColorBlack_disabled: '#626d76f6',
+  purple_400: 'rgb(110, 0, 195)',
   purple_400_a2: 'rgba(110, 0, 195, 0.2)',
   purple_400_a4: 'rgba(110, 0, 195, 0.4)',
   purple_400_a6: 'rgba(110, 0, 195, 0.6)',

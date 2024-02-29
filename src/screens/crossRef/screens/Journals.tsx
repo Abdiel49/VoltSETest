@@ -2,78 +2,102 @@ import {
   View,
   FlatList,
   ListRenderItem,
-  TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useRef} from 'react';
 
-import TextComponent from '../../../components/atoms/TextComponent';
-import {getJournalsData} from '../api/journals.api';
-import {IJournalItem, JournalQueryParams} from '../types';
-import {Colors} from '../../../styles/colors';
-import normalize from '../../../helpers/normalizeFontSize';
-import {gStyles} from '../../../styles/gStyles';
+import {useJournalFetch} from '../hooks/useJournalsFetch';
+
+import ListScrollController from '../../../components/molecules/ListScrollController';
 import JournalListHeader from '../components/JournalListHeader';
+import JournalListItem from '../components/JournalListItem';
+import JournalsEmptyList from '../components/JournalsEmptyList';
+import JournalsBottomDetails from '../components/JournalsBottomDetails';
+
+import normalize from '../../../helpers/normalizeFontSize';
+
+import {Colors} from '../../../styles/colors';
+import {gStyles} from '../../../styles/gStyles';
+import {IJournalItem} from '../types';
 
 const Journals = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [journalsData, setJournalsData] = useState<IJournalItem[]>([]);
-  const [queryParams, setQueryParams] = useState<JournalQueryParams>({
-    offset: 0,
-    query: '',
-    rows: 10,
-  });
+  const {
+    isLoading,
+    journals,
+    queryParams,
+    totalResults,
+    nextJournalsPage,
+    reloadJournalsQuery,
+    searchQuery,
+  } = useJournalFetch();
+  const flatlistRef = useRef<FlatList<IJournalItem>>(null);
 
-  const getData = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await getJournalsData(queryParams);
-      if (response) {
-        const {data} = response;
-        setJournalsData(data.items);
-      }
-    } catch (error) {
-      console.error('Error on get data');
-    } finally {
-      setIsLoading(false);
+  const goUpList = () => {
+    if (!flatlistRef || !flatlistRef.current || !journals) {
+      return;
     }
-  }, [queryParams]);
+    flatlistRef.current.scrollToIndex({
+      animated: true,
+      index: 0,
+      viewOffset: 100,
+    });
+  };
 
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  const goEndList = () => {
+    if (!flatlistRef || !flatlistRef.current || !journals) {
+      return;
+    }
+    flatlistRef.current.scrollToEnd();
+  };
+
+  const renderHeader = () => {
+    return (
+      <JournalListHeader
+        queryParams={queryParams}
+        onSubmintQuery={searchQuery}
+      />
+    );
+  };
+
+  const renderFooter = () => {
+    return (
+      <View style={gStyles.mv}>
+        {isLoading && (
+          <ActivityIndicator size={42} color={Colors.purple_400_a8} />
+        )}
+      </View>
+    );
+  };
 
   const renderItem: ListRenderItem<IJournalItem> = ({item, index}) => {
-    return (
-      <TouchableOpacity
-        key={index}
-        activeOpacity={0.7}
-        style={[styles.cardItem, gStyles.card2, gStyles.shadow_10]}>
-        <TextComponent text={item.title} bold type="medium" />
-        <TextComponent text={item.publisher} type="small" />
-        <View style={styles.cardRowsContainer}>
-          <View style={styles.cardItem_rowIssn}>
-            <TextComponent text={'ISSN:'} type="small" bold />
-            {item.ISSN.map((issn, issnIdx) => (
-              <View style={styles.issnitem} key={issnIdx}>
-                <TextComponent text={issn} type="small" bold />
-              </View>
-            ))}
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+    return <JournalListItem journal={item} key={index} />;
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={journalsData}
+        ref={flatlistRef}
+        data={journals}
         renderItem={renderItem}
         style={styles.flatList}
         refreshing={isLoading}
-        onRefresh={getData}
-        ListHeaderComponent={JournalListHeader}
+        onRefresh={reloadJournalsQuery}
+        ListHeaderComponent={renderHeader}
+        windowSize={10}
+        onEndReached={nextJournalsPage}
+        ListFooterComponent={renderFooter}
+        ListEmptyComponent={JournalsEmptyList}
+      />
+      <ListScrollController
+        containerStyle={[styles.listControllContainer, gStyles.shadow_10]}
+        onPressUp={goUpList}
+        onPressDown={goEndList}
+      />
+      <JournalsBottomDetails
+        offset={queryParams.offset}
+        journalsLength={journals?.length || 0}
+        totalResults={totalResults}
       />
     </View>
   );
@@ -88,26 +112,11 @@ const styles = StyleSheet.create({
   flatList: {
     flex: 1,
   },
-  cardItem: {
-    backgroundColor: Colors.white,
-    padding: 16,
-    marginHorizontal: normalize(16),
-    marginTop: 8,
-    marginBottom: normalize(8),
-  },
-  cardItem_rowIssn: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+  listControllContainer: {
+    flexDirection: 'column',
     gap: normalize(10),
-    flexWrap: 'wrap',
-  },
-  issnitem: {
-    backgroundColor: Colors.purple_400_a2,
-    padding: 6,
-    borderRadius: 10,
-  },
-  cardRowsContainer: {
-    marginTop: 5,
+    position: 'absolute',
+    right: normalize(20),
+    bottom: normalize(60),
   },
 });

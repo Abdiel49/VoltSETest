@@ -1,7 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import TextInputComponent from '../atoms/TextInputComponent';
 
@@ -12,16 +11,19 @@ import {gStyles} from '../../styles/gStyles';
 
 interface SearchComponentProps {
   onSearch?: (text: string) => void;
+  onChangeText?: (text: string) => void;
   placeholder?: string;
   autoSearch?: boolean;
   lengthLot?: number;
+  value?: string;
 }
 
 const SearchComponent = (props: SearchComponentProps) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>(props.value || '');
 
   const onChangeInput = (text: string) => {
     setValue(text);
+    props.onChangeText && props.onChangeText(text);
     if (
       props.autoSearch &&
       props.onSearch &&
